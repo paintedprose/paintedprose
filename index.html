@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="painted prose — an illustrated diary by Mezziah" />
+  <meta name="theme-color" content="#FBE4EA" />
+  <link rel="icon" href="assets/images/seal.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -14,7 +16,10 @@
 </head>
 <body class="page home">
     <header class="site-header">
-      <a class="brand" href="index.html"><span class="brand-line">painted</span> <span class="brand-line">prose</span></a>
+      <a class="brand" href="index.html">
+        <img class="logo" src="assets/images/seal.png" alt="painted prose logo">
+        <span class="brand-text">painted prose</span>
+      </a>
       <nav class="nav">
         <a href="journal.html">Journal</a>
         <a href="portfolio.html">Portfolio</a>
@@ -24,10 +29,10 @@
     </header>
 
   <main>
-    <section class="hero parchment">
+
+    <section class="hero hero-banner">
       <div class="hero-inner fade-in">
-        <h1 class="hero-title">painted prose</h1>
-        <p class="tagline">An illustrated diary of words, pigment, and peculiar tenderness.</p>
+        <h1 class="hero-title sr-only">painted prose</h1>
         <a class="cta" href="journal.html">Enter the Journal</a>
       </div>
       <div class="hero-vignette" aria-hidden="true"></div>
@@ -52,6 +57,7 @@
         <a class="link" href="about.html">Meet Mezziah</a>
       </article>
     </section>
+
   </main>
     <footer class="site-footer">
       <p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p>
