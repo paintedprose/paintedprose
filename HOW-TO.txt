@@ -1,0 +1,24 @@
+INSTALL GUIDE — Subtle Animations + Journal Post Generator
+
+1) Upload to your repo:
+   - assets/motion/animations.css
+   - assets/motion/animations.js
+   - tools/post-maker.html
+
+2) Wire the animations on every page:
+   In the <head> of each page (index.html, journal.html, etc.), add:
+   <link rel="stylesheet" href="assets/motion/animations.css" />
+   <script defer src="assets/motion/animations.js"></script>
+
+3) Use the Post Generator:
+   Visit /tools/post-maker.html on your live site (or open the file locally).
+   - Fill Title, Date, Tags
+   - Paste your poem (blank lines produce new paragraphs)
+   - Click “Download post file” (it will be named from your title, e.g. drought.html)
+   - Upload the file into posts/ in your repo
+   - Click “Copy journal snippet” and paste inside <section class="entries"> in journal.html
+
+4) Notes:
+   - Animations respect “prefers-reduced-motion” automatically.
+   - Hero parallax is very subtle; remove by deleting animations.js or the parallax block.
+   - You can adjust hover float by editing the .card:hover rule in animations.css.

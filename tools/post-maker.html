@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post Generator — painted prose</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles-addendum.css" />
+  <style>
+    :root{--panel:#fff}
+    body{background:var(--bg)}
+    .wrap{max-width:1100px;margin:0 auto;padding:20px}
+    .tool{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{background:var(--panel)}
+    label{display:block;margin-bottom:8px;font-variant:small-caps;letter-spacing:.8px}
+    input, textarea{width:100%;padding:10px;border:1px solid rgba(90,42,58,.2);border-radius:10px;background:#fff}
+    textarea{min-height:220px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .btn{display:inline-block;background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;padding:10px 14px;border-radius:12px;margin-right:8px}
+    .small{font-size:.9rem;opacity:.8}
+    .preview{padding:10px}
+    .snippet{white-space:pre; background: #fff; border:1px dashed rgba(90,42,58,.3); padding:10px; border-radius:10px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.9rem}
+    @media(max-width:900px){ .tool{grid-template-columns:1fr} }
+  </style>
+</head>
+<body class="page tools">
+  <header class="site-header">
+    <a class="brand" href="../index.html"><span class="brand-text">painted prose</span></a>
+    <nav class="nav">
+      <a href="../journal.html">Journal</a>
+      <a href="../portfolio.html">Portfolio</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h1>Journal Post Generator</h1>
+    <p class="subhead">Paste your poem, pick a date & tags, and download a ready-to-publish HTML file.</p>
+
+    <section class="tool">
+      <div class="card" style="padding:16px">
+        <label>Title<input id="title" placeholder="Drought"></label>
+        <div class="row">
+          <label>Date<input id="date" placeholder="Nov 10, 2025"></label>
+          <label>Tags (comma‑separated)<input id="tags" placeholder="Poetry, Illustration"></label>
+        </div>
+        <label>Poem / Post Content (plain text; empty lines → new paragraphs)
+          <textarea id="content" placeholder="Paste your poem here..."></textarea>
+        </label>
+        <div style="margin-top:8px">
+          <a class="btn" id="download">Download post file</a>
+          <a class="btn" id="copySnippet">Copy journal snippet</a>
+          <span class="small">The file will be named from your title (e.g., <code>drought.html</code>).</span>
+        </div>
+        <p class="small">When downloaded, upload the file to <strong>posts/</strong> in your repo, and paste the snippet into <strong>journal.html</strong>.</p>
+      </div>
+
+      <div class="card preview">
+        <article class="post">
+          <h2 class="post-title" id="p-title">Title Preview</h2>
+          <div class="post-meta" id="p-meta">Date · Tags</div>
+          <img class="ornament" src="../assets/ornaments/divider.svg" alt="divider"/>
+          <section class="content" id="p-content"><p>Paragraph preview…</p></section>
+          <p class="signature">— Mezziah</p>
+        </article>
+        <h3>Journal Entry Snippet</h3>
+        <pre class="snippet" id="snip"></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p>
+    <p class="footer-small">© <span id="year"></span> painted prose — written & illustrated by Mezziah</p>
+  </footer>
+
+  <script>
+    const $ = (sel)=>document.querySelector(sel);
+    const title = $('#title'), date = $('#date'), tags = $('#tags'), content = $('#content');
+    const pTitle = $('#p-title'), pMeta = $('#p-meta'), pContent = $('#p-content'), snip = $('#snip');
+    const slugify = (s)=> s.toLowerCase().trim().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-');
+    const escapeHTML = s => s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+
+    function toParagraphs(txt){
+      const parts = txt.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+      return parts.map(p=>`<p>${escapeHTML(p).replace(/\n/g,'<br>')}</p>`).join('\n');
+    }
+    function update(){
+      const t = title.value || 'Untitled';
+      const d = date.value || new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+      const tg = tags.value || 'Poetry';
+      const html = toParagraphs(content.value || 'Write something tender and a little feral.');
+      pTitle.textContent = t;
+      pMeta.textContent = d + ' · ' + tg;
+      pContent.innerHTML = html;
+
+      const fileName = slugify(t) + '.html';
+      snip.textContent = `<article class="entry card" data-tags="${tg}">
+  <div class="entry-media placeholder"></div>
+  <div class="entry-body">
+    <h2 class="entry-title"><a href="posts/${fileName}">${t}</a></h2>
+    <p class="entry-excerpt">` + (content.value.split('\n')[0] || '…') + `</p>
+    <div class="entry-meta"><time>${d}</time> · <span>`+ (tg.split(',')[0]||'') + `</span></div>
+  </div>
+</article>`;
+      return {t,d,tg,html,fileName};
+    }
+    ['input','keyup','change'].forEach(ev=>{
+      [title,date,tags,content].forEach(el=> el.addEventListener(ev, update));
+    });
+    update();
+
+    // Build downloadable post file
+    $('#download').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const {t,d,tg,html,fileName} = update();
+      const tpl = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${t} — painted prose</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles-addendum.css" />
+  <script defer src="../script.js"></script>
+</head>
+<body class="page post-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html"><span class="brand-text">painted prose</span></a>
+    <nav class="nav">
+      <a href="../journal.html">Journal</a>
+      <a href="../portfolio.html">Portfolio</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <article class="post card">
+      <h1 class="post-title">${t}</h1>
+      <div class="post-meta">${d} · ${tg}</div>
+      <img class="ornament" src="../assets/ornaments/divider.svg" alt="divider"/>
+      <section class="content">
+${html}
+      </section>
+      <p class="signature">— Mezziah</p>
+      <div class="nav"><a href="../journal.html">← Back to Journal</a><span></span></div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p>
+    <p class="footer-small">© <span id="year"></span> painted prose — written & illustrated by Mezziah</p>
+  </footer>
+</body>
+</html>`;
+      const blob = new Blob([tpl], {type:'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+      a.remove();
+    });
+
+    // Copy snippet
+    $('#copySnippet').addEventListener('click', (e)=>{
+      e.preventDefault();
+      navigator.clipboard.writeText(snip.textContent);
+      alert('Snippet copied! Paste it into journal.html inside <section class="entries">.');
+    });
+  </script>
+</body>
+</html>
