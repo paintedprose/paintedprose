@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Post Generator PRO — painted prose (fixed)</title>
+<link rel="stylesheet" href="../styles.css"/><link rel="stylesheet" href="../styles-addendum.css"/>
+<style>
+.tools main{max-width:1100px;margin:20px auto}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.actions .cta{white-space:nowrap}
+#preview{display:none;margin-top:12px}
+#preview textarea{width:100%;min-height:320px}
+.note{font-size:.95rem;opacity:.9}
+</style>
+</head><body class="page tools">
+<header class="site-header"><a class="brand" href="../index.html"><span class="brand-text">painted prose</span></a>
+<nav class="nav"><a href="../journal.html">Journal</a><a href="../portfolio.html">Portfolio</a><a href="../sketchbook.html">Sketchbook</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></header>
+<main class="card">
+<h1>Journal Post Generator — PRO (fixed)</h1>
+<p class="subhead">If your browser blocks downloads, use “Open in new tab” or “Show HTML” and save manually.</p>
+<section>
+  <label>Title <input id="t" style="width:100%" placeholder="Title"></label>
+  <label>Date <input id="d" placeholder="Nov 10, 2025" style="width:100%"></label>
+  <label>Tags <input id="g" placeholder="Poetry, Illustration" style="width:100%"></label>
+  <label>Content<textarea id="c" style="width:100%;min-height:220px" placeholder="Paste poem or prose..."></textarea></label>
+  <div class="actions">
+    <button class="cta" id="dl">Download post file</button>
+    <button class="cta" id="open">Open in new tab</button>
+    <button class="cta" id="show">Show HTML</button>
+    <button class="cta" id="sn">Copy journal snippet</button>
+  </div>
+  <p class="note">Tip: If you’re viewing this inside GitHub’s file viewer, downloads may be blocked. Open the page from your live site URL instead.</p>
+</section>
+
+<section id="preview" class="card">
+  <h2>Post HTML (manual save)</h2>
+  <p class="note">Copy this into a new file under <code>/posts/</code> and name it from the slug (e.g., <code>my-title.html</code>).</p>
+  <textarea id="htmlout"></textarea>
+  <div class="actions">
+    <button class="cta" id="copyhtml">Copy HTML</button>
+  </div>
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h2>Auto-update Search & Feeds</h2>
+  <p>Use these if you want to update your search and JSON feed here too.</p>
+  <button class="cta" id="fetch">Fetch current files</button>
+  <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+    <div><label>search/index.json<textarea id="searchjson" style="width:100%;min-height:200px"></textarea></label></div>
+    <div><label>feeds/feed.json<textarea id="feedjson" style="width:100%;min-height:200px"></textarea></label></div>
+  </div>
+  <div class="actions">
+    <button class="cta" id="merge">Merge current entry</button>
+    <button class="cta" id="download-search">Download updated index.json</button>
+    <button class="cta" id="download-feedjson">Download updated feed.json</button>
+  </div>
+</section>
+
+<h2 class="sr-only">Journal snippet</h2>
+<pre id="out" class="card" style="white-space:pre-wrap;margin-top:16px"></pre>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+const slug=s=>s.toLowerCase().trim().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-');
+const paras=t=>t.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean).map(p=>`<p>${esc(p).replace(/\n/g,'<br>')}</p>`).join('\n');
+function build(){
+  const T=$('#t').value||'Untitled', D=$('#d').value||new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+  const G=$('#g').value||'Poetry', C=paras($('#c').value||'Write something tender and a little feral.'), F=slug(T)+'.html';
+  $('#out').textContent = `<article class="entry card" data-tags="${G}">\n  <div class="entry-body">\n    <h2 class="entry-title"><a href="posts/${F}">${T}</a></h2>\n    <p class="entry-excerpt">${($('#c').value.split('\n')[0]||'…')}</p>\n    <div class="entry-meta"><time>${D}</time> · <span>${(G.split(',')[0]||'')}</span></div>\n  </div>\n</article>`;
+  const html=`<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>${T} — painted prose</title><link rel="stylesheet" href="../styles.css"/><link rel="stylesheet" href="../styles-addendum.css"/><link rel="stylesheet" href="../share.css"/><script defer src="../script.js"></script><script defer src="../share.js"></script></head><body class="page post-page"><header class="site-header"><a class="brand" href="../index.html"><span class="brand-text">painted prose</span></a><nav class="nav"><a href="../journal.html">Journal</a><a href="../portfolio.html">Portfolio</a><a href="../sketchbook.html">Sketchbook</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></header><main><article class="post card"><h1 class="post-title">${T}</h1><div class="post-meta">${D} · ${G}</div><img class="ornament" src="../assets/ornaments/divider.svg" alt="divider"/><section class="content">\n${C}\n</section><div class="share" data-url="" data-title="${T}"><a data-share="twitter" class="share-btn" href="#" target="_blank" rel="noopener">Twitter</a><a data-share="bluesky" class="share-btn" href="#" target="_blank" rel="noopener">Bluesky</a><a data-share="tumblr" class="share-btn" href="#" target="_blank" rel="noopener">Tumblr</a><a data-share="copy" class="share-btn" href="#">Copy link</a></div><p class="signature">— Mezziah</p><div class="nav"><a href="../journal.html">← Back to Journal</a><span></span></div></article></main><footer class="site-footer"><p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p><p class="footer-small">© <span id="year"></span> painted prose — written & illustrated by Mezziah</p></footer></body></html>`;
+  return {T,D,G,C,F,html};
+}
+function triggerDownload(filename, text){
+  try{
+    const blob=new Blob([text],{type:'text/html'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download=filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 1200);
+    return true;
+  }catch(e){ return false; }
+}
+
+$('#dl').onclick=(e)=>{
+  e.preventDefault();
+  const {F,html}=build();
+  const ok = triggerDownload(F, html);
+  if(!ok){ alert('Browser blocked the download. Use “Open in new tab” or “Show HTML” to save manually.'); }
+};
+
+$('#open').onclick=(e)=>{
+  e.preventDefault();
+  const {html}=build();
+  const w = window.open('', '_blank');
+  if(w){ w.document.open(); w.document.write(html); w.document.close(); }
+  else { alert('Popup blocked. Temporarily allow popups for this site.'); }
+};
+
+$('#show').onclick=(e)=>{
+  e.preventDefault();
+  const {html}=build();
+  document.getElementById('preview').style.display='block';
+  document.getElementById('htmlout').value = html;
+};
+
+$('#copyhtml').onclick=(e)=>{
+  e.preventDefault();
+  const ta=document.getElementById('htmlout'); ta.select(); document.execCommand('copy');
+  alert('HTML copied to clipboard. Paste into a new file under /posts/. (Name it from the slug.)');
+};
+
+$('#sn').onclick=(e)=>{e.preventDefault();navigator.clipboard.writeText($('#out').textContent);alert('Snippet copied! Paste inside <section class="entries"> in journal.html');};
+
+$('#fetch').onclick=async()=>{
+  try{
+    const sj = await fetch('../search/index.json').then(r=>r.text());
+    const fj = await fetch('../feeds/feed.json').then(r=>r.text());
+    document.getElementById('searchjson').value = sj; document.getElementById('feedjson').value = fj;
+    alert('Fetched!');
+  }catch(e){ alert('Fetch failed. You can paste your files manually.'); }
+};
+
+function downloadText(filename, text){
+  const blob = new Blob([text], {type:'application/octet-stream'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); a.remove();
+}
+
+document.getElementById('merge').onclick=()=>{
+  const {T,D,G,C,F}=build();
+  try{
+    const s = JSON.parse(document.getElementById('searchjson').value||'[]');
+    s.push({title:T, url:`posts/${F}`, excerpt:(document.getElementById('c').value.split('\n')[0]||'…'), tags:G});
+    document.getElementById('searchjson').value = JSON.stringify(s, null, 2);
+    const feed = JSON.parse(document.getElementById('feedjson').value||'{"items":[]}');
+    feed.items = feed.items || [];
+    feed.items.unshift({id:`posts/${F}`, url:`posts/${F}`, title:T, content_html:C, date_published:new Date().toISOString(), tags:G.split(',').map(x=>x.trim()).filter(Boolean)});
+    document.getElementById('feedjson').value = JSON.stringify(feed, null, 2);
+    alert('Merged. Now download the updated files.');
+  }catch(e){
+    alert('Could not parse current files. Paste valid JSON first.');
+  }
+};
+
+document.getElementById('download-search').onclick=()=> downloadText('index.json', document.getElementById('searchjson').value||'[]');
+document.getElementById('download-feedjson').onclick=()=> downloadText('feed.json', document.getElementById('feedjson').value||'{"items":[]}');
+</script>
+</body></html>
