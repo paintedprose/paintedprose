@@ -1,0 +1,53 @@
+posts/post-template.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{Craving}} — painted prose</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles-addendum.css" />
+  <script defer src="../script.js"></script>
+</head>
+<body class="page post-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html"><span class="brand-text">painted prose</span></a>
+    <nav class="nav">
+      <a href="../journal.html">Journal</a>
+      <a href="../portfolio.html">Portfolio</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post card">
+      <h1 class="post-title">{{Craving}}</h1>
+      <div class="post-meta">{{Nov 10, 2025}} · {{Poetry, Illustration}}</div>
+      <img class="ornament" src="../assets/ornaments/divider.svg" alt="divider"/>
+      <section class="content">
+<p>Swelling under the skin,
+a fever that never breaks.<p>
+<p>It waits between breaths,
+tasting the air as it aches.<p>
+<p>Like water, it moves in waves,
+collapsing onto caves.<p>
+<p>Prickling like urchins,
+recedes in hesitation and lurches.<p>
+<p>Salt stings the throat as it swallows urges,
+but the eyes dilate, filled with perversions.<p>
+      </section>
+      <p class="signature">—with love and gratitude, Mezziah</p>
+      <div class="nav">
+        <a href="../journal.html">← Back to Journal</a>
+        <span></span>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p>
+    <p class="footer-small">© <span id="year"></span> painted prose — written & illustrated by Mezziah</p>
+  </footer>
+</body>
+</html>
