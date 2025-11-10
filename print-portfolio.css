@@ -1,0 +1,13 @@
+@media print{
+  @page{margin:18mm}
+  body{background:#fff;color:#000;font-family: 'Cormorant Garamond', serif}
+  .site-header,.site-footer{display:none}
+  .page main{max-width:none;padding:0}
+  .page-header{margin:0 0 10mm}
+  .page-header h1{font-family:'Playfair Display',serif;font-size:28pt;margin:0 0 2mm}
+  .subhead{font-size:12pt;opacity:1}
+  .gallery{display:block}
+  .gallery-item{break-inside:avoid;margin:0 0 8mm;padding:0;border:none;box-shadow:none}
+  .gallery-media{height:auto}
+  figcaption{text-align:left;font-size:10pt;margin-top:2mm}
+}

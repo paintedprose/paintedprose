@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>painted prose — Journal</title>
+    <link>https://YOUR-USERNAME.github.io/paintedprose/</link>
+    <description>An illustrated diary by Mezziah</description>
+    <lastBuildDate>Mon, 10 Nov 2025 16:10:24 +0000</lastBuildDate>
+    <item>
+      <title>Drought</title>
+      <link>https://YOUR-USERNAME.github.io/paintedprose/posts/drought.html</link>
+      <guid>posts/drought.html</guid>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+      <description>I keep trying to pour... well is running dry.</description>
+    </item>
+  </channel>
+</rss>

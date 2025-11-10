@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sketchbook Helper — painted prose</title>
+<link rel="stylesheet" href="../styles.css"/>
+</head><body class="page tools"><main class="card" style="max-width:1000px;margin:20px auto">
+<h1>Sketchbook Upload Helper</h1>
+<p>Drop images here (or click) → it generates `<figure>` blocks for `sketchbook.html` or `portfolio.html`.</p>
+<input id="file" type="file" accept="image/*" multiple style="padding:10px;border:1px solid rgba(90,42,58,.2);border-radius:10px;background:#fff;width:100%"/>
+<pre id="out" class="card" style="white-space:pre-wrap"></pre>
+<button class="cta" id="copy">Copy</button>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+$('#file').addEventListener('change', ()=>{
+  const figs = Array.from($('#file').files).map(f=>{
+    const name = f.name.replace(/\s+/g,'-').toLowerCase();
+    return `<figure class="gallery-item card">
+  <a href="assets/sketchbook/${name}" data-lightbox data-caption="${name.replace(/[-_]/g,' ').replace(/\..+$/,'')}">
+    <div class="gallery-media"><img src="assets/sketchbook/${name}" loading="lazy" alt="${name}"></div>
+  </a>
+  <figcaption>${name.replace(/[-_]/g,' ').replace(/\..+$/,'')}</figcaption>
+</figure>`;
+  }).join('\n\n');
+  $('#out').textContent = figs || 'No files yet.';
+});
+$('#copy').onclick=()=>{navigator.clipboard.writeText($('#out').textContent); alert('Copied. Paste figures into sketchbook.html or portfolio.html');};
+</script>
+</body></html>

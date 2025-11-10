@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Drought",
+    "url": "posts/drought.html",
+    "excerpt": "I keep trying to pour... well is running dry.",
+    "tags": "Poetry"
+  },
+  {
+    "title": "Journal",
+    "url": "journal.html",
+    "excerpt": "Collected verses and sketches.",
+    "tags": "Index"
+  },
+  {
+    "title": "Portfolio",
+    "url": "portfolio.html",
+    "excerpt": "Illustration series and projects.",
+    "tags": "Gallery"
+  },
+  {
+    "title": "Sketchbook",
+    "url": "sketchbook.html",
+    "excerpt": "Roughs and in-progress pieces.",
+    "tags": "Gallery"
+  },
+  {
+    "title": "About",
+    "url": "about.html",
+    "excerpt": "An illustrated diary: blush-pink, vintage-academic, whisper of gothic.",
+    "tags": "About"
+  },
+  {
+    "title": "Contact",
+    "url": "contact.html",
+    "excerpt": "Commissions, collaborations, conversation.",
+    "tags": "Form"
+  }
+]

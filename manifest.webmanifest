@@ -1,0 +1,20 @@
+{
+  "name": "painted prose",
+  "short_name": "painted prose",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FBE4EA",
+  "theme_color": "#FBE4EA",
+  "icons": [
+    {
+      "src": "assets/images/seal.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/seal.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

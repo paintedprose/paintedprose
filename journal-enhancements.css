@@ -1,0 +1,6 @@
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 20px 10px}
+.filter-bar .chip{border:1px solid rgba(90,42,58,.2);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer}
+.filter-bar .chip.active{background:linear-gradient(135deg,var(--rose),var(--plum));color:#fff;border-color:transparent}
+.pager{display:flex;justify-content:space-between;gap:10px;margin:12px 20px 0}
+.pager button{border:1px solid rgba(90,42,58,.2);background:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}
+.pager button:disabled{opacity:.4;cursor:not-allowed}

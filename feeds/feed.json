@@ -1,0 +1,18 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "painted prose \u2014 Journal",
+  "home_page_url": "https://YOUR-USERNAME.github.io/paintedprose/",
+  "feed_url": "https://YOUR-USERNAME.github.io/paintedprose/feeds/feed.json",
+  "items": [
+    {
+      "id": "posts/drought.html",
+      "url": "https://YOUR-USERNAME.github.io/paintedprose/posts/drought.html",
+      "title": "Drought",
+      "content_html": "<p>I keep trying to pour... well is running dry.</p>",
+      "date_published": "2025-03-20T00:00:00Z",
+      "tags": [
+        "Poetry"
+      ]
+    }
+  ]
+}
