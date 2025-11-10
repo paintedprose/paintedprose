@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="painted prose — an illustrated diary by Mezziah" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+
+  <title>painted prose — contact</title>
+</head>
+<body class="page contact">
+    <header class="site-header">
+      <a class="brand" href="index.html"><span class="brand-line">painted</span> <span class="brand-line">prose</span></a>
+      <nav class="nav">
+        <a href="journal.html">Journal</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+  <main>
+    <header class="page-header">
+      <h1>Send a Letter</h1>
+      <p class="subhead">Commissions, collaborations, or conversation — my inbox is open.</p>
+    </header>
+
+    <section class="contact-wrap card">
+      <form class="contact-form" name="contact" method="post" data-netlify="true">
+        <label>Name<input name="name" required /></label>
+        <label>Email<input type="email" name="email" required /></label>
+        <label>Message<textarea name="message" rows="6" required></textarea></label>
+        <button class="cta" type="submit">Send</button>
+      </form>
+      <div class="contact-art placeholder"></div>
+    </section>
+  </main>
+    <footer class="site-footer">
+      <p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p>
+      <p class="footer-small">© <span id="year"></span> painted prose — written & illustrated by Mezziah</p>
+    </footer>
+
+</body>
+</html>
