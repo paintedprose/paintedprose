@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>When the Boogieman Dies — painted prose</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles-addendum.css" />
+  <link rel="stylesheet" href="../share.css" />
+  <script defer src="../script.js"></script>
+  <script defer src="../share.js"></script>
+</head>
+<body class="page post-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html"><span class="brand-text">painted prose</span></a>
+    <nav class="nav">
+      <a href="../journal.html">Journal</a>
+      <a href="../portfolio.html">Portfolio</a>
+      <a href="../sketchbook.html">Sketchbook</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post card">
+      <h1 class="post-title">When the Boogieman Dies</h1>
+      <div class="post-meta">Nov. 10, 2025 · Poetry</div>
+      <img class="ornament" src="../assets/ornaments/divider.svg" alt="divider" />
+
+      <section class="content">
+        <p>Rejoice.<br> Rejoice that fear no longer clings,<br> that I need not shrink beneath its wings.</p>
+        <p>Embrace the sunlight again,<br> remember what it was before,<br> the pain, the fear, the grotesque sway<br> that shadowed every passing day.</p>
+        <p>At one point it was a child,<br> a lover, quiet, meek, and mild,<br> a friend, a spouse, a parent too,<br> the boogieman now made human through.</p>
+        <p>No longer permanent, yet weight remains.<br> Who carries the memory of its chains?<br>Only the things it left behind<br> can bear the echoes trapped in mind.</p>
+        <p>I thought the earth could hold its end,<br> but I became the hope it failed to send.<br>A small flame flickered, almost gone,<br> I carry both its grief and song.</p>
+        <p>I am its daughter,<br> its victim,<br> its remnants,<br> drawn back always to that ghost.</p>
+        <p>A spirit it forgot to honor,<br> a joy it once wanted to flower.</p>
+        <p>But what do I do with the pain?<br> It has not left; the scars still ache during the rain.</p>
+        <p>Even now, the quiet hums with sorrow.<br> Who can I fault for what was borrowed?<br>It was shaped by hands before my time,<br> by echoes carried down the line.</p>
+        <p>Origins no longer matter.<br> Yet still they whisper, faint and scattered.<br>And from that grief, I bear the flame—<br> a quiet witness to its name.</p>
+      </section>
+
+      <div class="share" data-url="" data-title="When the Boogieman Dies">
+        <a data-share="twitter" class="share-btn" href="#" target="_blank" rel="noopener">Twitter</a>
+        <a data-share="bluesky" class="share-btn" href="#" target="_blank" rel="noopener">Bluesky</a>
+        <a data-share="tumblr" class="share-btn" href="#" target="_blank" rel="noopener">Tumblr</a>
+        <a data-share="copy" class="share-btn" href="#">Copy link</a>
+      </div>
+
+      <p class="signature">— Mezziah</p>
+      <div class="nav">
+        <a href="../journal.html">← Back to Journal</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-quote">“Every line I draw is a sentence I could not speak.”</p>
+    <p class="footer-small">© <span id="year"></span> painted prose — written & illustrated by Mezziah</p>
+  </footer>
+</body>
+</html>
